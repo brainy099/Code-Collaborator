@@ -3,16 +3,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 class SimpleCheckbox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { checked: true };
-  }
 
   handleChange = event => {
-    this.setState(
-      { checked: event.target.checked },
-      this.props.setValue(this.props.value, event.target.checked)
-    );
+    this.props.setValue(this.props.value, event.target.checked)
   };
 
   render() {
@@ -20,7 +13,7 @@ class SimpleCheckbox extends Component {
       <FormControlLabel
         control={
           <Checkbox
-            checked={this.state.checked}
+            checked={this.props.status}
             onChange={this.handleChange}
             value={this.props.value}
             color="primary"

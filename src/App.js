@@ -4,8 +4,10 @@ import AceEditor from "react-ace";
 import fire from "./fire";
 import SimpleMenu from "./component/Simple-menu";
 import SimpleCheckbox from "./component/Simple-Checkbox";
+import FormLabel from "@material-ui/core/FormLabel";
 import "typeface-roboto";
 
+import "ace-builds/src-noconflict/ext-language_tools"
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
@@ -74,16 +76,23 @@ class App extends Component {
   };
 
   render() {
-    const { message, theme, themes, language, languages } = this.state;
+    const { message, theme, themes, language, languages, enableLiveAutocompletion, enableBasicAutocompletion, enableSnippets,showLineNumbers } = this.state;
     return (
       <>
-        <h1 class="header">CODE COLLABORATOR</h1>
+        <h1 className="header">CODE COLLABORATOR</h1>
         <div className="container">
           <AceEditor
             mode={language}
             theme={theme}
             onChange={this.onChange}
             value={message}
+            fontSize={14}
+            setOptions={{
+              enableBasicAutocompletion: enableBasicAutocompletion,
+              enableLiveAutocompletion: enableLiveAutocompletion,
+              enableSnippets: enableSnippets,
+              showLineNumbers: showLineNumbers
+              }}
           />
           <SimpleMenu type="theme" children={themes} setValue={this.setValue} />
           <SimpleMenu
@@ -92,25 +101,32 @@ class App extends Component {
             setValue={this.setValue}
           />
           <div className="checkbox">
+          <FormLabel component="legend">
+            OPTIONS
+          </FormLabel>
             <SimpleCheckbox
               setValue={this.setValue}
               label="Enable Live Autocomplete"
               value="enableLiveAutocompletion"
+              status={enableLiveAutocompletion}
             />
             <SimpleCheckbox
               setValue={this.setValue}
               label="Enable Snippets"
               value="enableSnippets"
+              status={enableSnippets}
             />
             <SimpleCheckbox
               setValue={this.setValue}
               label="Enable Basic Autocompletion"
               value="enableBasicAutocompletion"
+              status={enableBasicAutocompletion}
             />
             <SimpleCheckbox
               setValue={this.setValue}
               label="Show Line Numbers"
               value="showLineNumbers"
+              status={showLineNumbers}
             />
           </div>
         </div>

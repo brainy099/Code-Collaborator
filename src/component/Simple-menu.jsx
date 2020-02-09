@@ -26,7 +26,7 @@ export default class RadioButtonsGroup extends Component {
               return (
                 <FormControlLabel
                   value={val}
-                  control={<Radio />}
+                  control={<Radio color="primary"/>}
                   label={val.charAt(0).toUpperCase() + val.slice(1)}
                 />
               );
